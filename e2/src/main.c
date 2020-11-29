@@ -1,16 +1,10 @@
 #include <stdio.h>
-#include <polyn.h>
+#include "polyn.h"
 
 /// 从stdin取得多项式的参数，格式：项数N 系数1 指数1 系数2 指数2 ...... 系数N 指数N 
-void get_polyn_parameters(unsigned* n, double coef[], int expn[])
-{
-    scanf("%ud", n);
-    *n = *n % 10;
-    for (size_t i = 0; i < *n; i++) {
-        scanf("%lf %d", coef + i, expn + i);
-    }
-}
+void get_polyn_parameters(unsigned* n, double coef[], int expn[]);
 
+/// 主函数
 int main()
 {
     // 缓存
@@ -46,11 +40,18 @@ int main()
     deinit_polyn(p1); // 回收内存
     deinit_polyn(p2);
     deinit_polyn(psum);
-    printf("memory leak count = %d\n", memory_leaks);
-    /*
-
-    3 2.0  0 3.0 2  1.0 3
-    3 2.0 0 2.0 2  1.0 3
-
-    */
 }
+
+void get_polyn_parameters(unsigned* n, double coef[], int expn[])
+{
+    scanf("%ud", n);
+    *n = *n % 10;
+    for (size_t i = 0; i < *n; i++) {
+        scanf("%lf %d", coef + i, expn + i);
+    }
+}
+/*
+3 1 0 2 1 3 2
+4 1 -1 1 1 -3 2 5 4
+
+*/

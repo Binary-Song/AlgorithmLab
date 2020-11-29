@@ -2,8 +2,7 @@
 #define _POLYN_H_
 
 #include <stdlib.h>
-#include <stdio.h>
-#include "mem.h"
+#include <stdio.h> 
 
 /// 多项式节点
 typedef struct Polyn
