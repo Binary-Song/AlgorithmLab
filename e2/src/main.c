@@ -40,6 +40,8 @@ int main()
     deinit_polyn(p1); // 回收内存
     deinit_polyn(p2);
     deinit_polyn(psum);
+    
+    getchar();
 }
 
 void get_polyn_parameters(unsigned* n, double coef[], int expn[])
