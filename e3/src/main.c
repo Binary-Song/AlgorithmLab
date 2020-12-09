@@ -7,7 +7,7 @@ void visit(BinTreeNode* node)
 int main()
 {
     BinTreeNode* t = get_bintree();
-    printf("\nforward traverse\n");
+    printf("\nforward traverse\n"); 
     fwd_trav(t, visit);
     printf("\nlevel traverse\n");
     lvl_trav(t, visit);

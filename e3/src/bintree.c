@@ -140,7 +140,7 @@ size_t cvt_static(BinTreeNode* root, SBinTree* stree)
 
 void print_static(SBinTree* tree)
 {
-    printf("static tree:\n");
+    printf("\nstatic tree: ");
     for (int i = 0; i < tree->size; i++) {
         printf("\nindex = %d   data = %d   lchild = %d   rchild = %d",i, tree->base[i].data, tree->base[i].lchild, tree->base[i].rchild);
     }
