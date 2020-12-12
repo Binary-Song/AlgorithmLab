@@ -2,6 +2,8 @@
 #include <string>
 #include <boost/regex.hpp>
 #include "map.h"
+
+#define SUPPRESS_LOADING_MESSAGES 
 Map MapScanner::scan(std::istream& strm)
 {
     using namespace boost;
@@ -17,14 +19,18 @@ Map MapScanner::scan(std::istream& strm)
         std::getline(strm, line);
         if (regex_match(line, matches, r_vertex)) {
             map.add_vertex(matches[1].str());
+#ifndef SUPPRESS_LOADING_MESSAGES
             std::cout << "[" << lineno << "]" <<
                 " vertex added: " << matches[1].str() << "\n";
+#endif
         }
         else if (regex_match(line, matches, r_bus)) {
             VertexIndex st = map.find_vertex(matches[2].str());
             map.add_bus(BusInfo(matches[1].str(), st));
+#ifndef SUPPRESS_LOADING_MESSAGES 
             std::cout << "[" << lineno << "]"
                 << " bus added: " << matches[1].str() << "\n";
+#endif 
         }
         else if (regex_match(line, matches, r_edge)) {
             VertexIndex v0, v1;
@@ -38,16 +44,20 @@ Map MapScanner::scan(std::istream& strm)
                 && (v1 = map.find_vertex(to_stop)) != -1
                 && (b = map.find_bus(bus_name)) != -1) {
                 map.add_edge(v0, v1, EdgeAddtionalData(length, b));
+#ifndef SUPPRESS_LOADING_MESSAGES
                 std::cout << "[" << lineno << "]" <<
                     " edge added: from " << from_stop
                     << " to " << to_stop
                     << " of bus " << bus_name
                     << " with the length of " << length
                     << "\n";
+#endif  
             }
             else {
+#ifndef SUPPRESS_LOADING_MESSAGES 
                 std::cout << "[" << lineno << "]" <<
                     " edge adding error\n";
+#endif   
             }
         }
         else if (regex_match(line, matches, r_comment)) {

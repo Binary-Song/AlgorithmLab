@@ -1,5 +1,6 @@
 #include "map.h"
-
+#include <stack>
+#include <cassert>
 VertexIndex Map::add_vertex(std::string name)
 {
     vertex_adjacency.push_back(Vertex(name));
@@ -25,7 +26,7 @@ BusIndex Map::find_bus(const std::string& bus_name)
     return -1;
 }
 
-VertexIndex Map::find_vertex(std::string name)
+VertexIndex Map::find_vertex(const std::string& name)
 {
     for (int i = 0; i < vertex_adjacency.size(); i++)
         if (vertex_adjacency[i].data.name == name)
@@ -60,4 +61,61 @@ std::vector<VertexIndex> Map::track_down_bus(BusIndex bi)
 VertexAddtionalData Map::get_vertex_data(VertexIndex i)
 {
     return vertex_adjacency[i].data;
+}
+
+
+void Map::dfs(VertexIndex src, VertexIndex dest
+    , std::vector<bool>& visited
+    , std::vector<Edge>& local_path
+    , std::vector<std::vector<Edge>>& res)
+{
+    if (src == dest) {
+        res.push_back(local_path);
+        return;
+    }
+    visited[src] = true;
+    for (auto&& e : vertex_adjacency[src].edges) {
+        if (!visited[e.tail]) {
+            local_path.push_back(e);
+            dfs(e.tail, dest, visited, local_path, res);
+            assert(local_path.back().tail == e.tail);
+            local_path.pop_back();
+        }
+    }
+    visited[src] = false;
+}
+
+
+
+std::vector<std::vector<Edge>> Map::search_paths(VertexIndex a, VertexIndex b)
+{
+    std::vector<std::vector<Edge>> res;
+    std::vector<bool> visited(vertex_adjacency.size());
+    std::vector<Edge> local_path;
+    dfs(a, b, visited, local_path, res);
+    return res;
+}
+
+std::vector<Edge> Map::inbound_edges(VertexIndex v)
+{
+    std::vector<Edge> res;
+    VertexIndex i = 0;
+    for (VertexIndex i = 0; i < vertex_adjacency.size();i++) {
+        for (auto& e : vertex_adjacency[i].edges) {
+            if (e.tail == v) {
+                res.push_back(e);
+            }
+        }
+    }
+    return res;
+}
+
+std::vector<Edge> Map::outbound_edges(VertexIndex v)
+{
+    std::vector<Edge> res;
+    VertexIndex i = 0;
+    for (auto& e : vertex_adjacency[v].edges) {
+        res.push_back(e);
+    }
+    return res;
 }
