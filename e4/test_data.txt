@@ -1,0 +1,8 @@
+vertex{name:BlueStreet}
+vertex{name:GreenAlley}
+vertex{name:YellowPath}
+vertex{name:RedStation}
+bus{name:B1,start:BlueStreet}
+edge{from:BlueStreet,to:GreenAlley,len:5,of_bus:B1}
+edge{from:GreenAlley,to:YellowPath,len:5,of_bus:B1}
+edge{from:YellowPath,to:RedStation,len:5,of_bus:B1}
