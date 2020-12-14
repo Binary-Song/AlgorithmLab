@@ -1,5 +1,6 @@
 #include <vector>
 #include <algorithm>
+#include <stdio.h>
 std::vector<int> random_vector(size_t size)
 {
     std::vector<int> v(size);

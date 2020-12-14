@@ -7,7 +7,8 @@ Dialog::Dialog(const char* file_name)
 {
     std::cout << "Loading map from " << file_name << std::endl;
     MapScanner scanner;
-    map = scanner.scan(std::ifstream(R"(D:\Projects\AlgorithmLab\e4\test_data.txt)"));
+    std::ifstream f(R"(D:\Projects\AlgorithmLab\e4\test_data.txt)");
+    map = scanner.scan(f);
     std::cout << "Map loaded!" << std::endl;
 }
 

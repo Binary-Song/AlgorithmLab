@@ -1,13 +1,13 @@
 #include "map_scanner.h"
 #include <string>
-#include <boost/regex.hpp>
+#include <regex>
 #include "map.h"
 
 // 定义此宏来禁止加载信息的输出
 #define SUPPRESS_LOADING_MESSAGES 
 Map MapScanner::scan(std::istream& strm)
-{
-    using namespace boost;
+{ 
+    using namespace std;
     Map map;
     smatch matches;
     regex r_vertex(R"(^vertex{name:([a-zA-Z0-9]+)})");//匹配顶点声明
