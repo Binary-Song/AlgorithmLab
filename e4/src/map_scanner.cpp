@@ -10,9 +10,9 @@ Map MapScanner::scan(std::istream& strm)
     using namespace std;
     Map map;
     smatch matches;
-    regex r_vertex(R"(^vertex{name:([a-zA-Z0-9]+)})");//匹配顶点声明
-    regex r_bus(R"(^bus{name:([a-zA-Z0-9]+),start:([a-zA-Z0-9]+)})");//匹配公交线路声明
-    regex r_edge(R"(^edge{from:([a-zA-Z0-9]+),to:([a-zA-Z0-9]+),len:(\d+),of_bus:([a-zA-Z0-9]+)})");//匹配边声明
+    regex r_vertex(R"(^vertex\{name:([a-zA-Z0-9]+)\})");//匹配顶点声明
+    regex r_bus(R"(^bus\{name:([a-zA-Z0-9]+),start:([a-zA-Z0-9]+)\})");//匹配公交线路声明
+    regex r_edge(R"(^edge\{from:([a-zA-Z0-9]+),to:([a-zA-Z0-9]+),len:(\d+),of_bus:([a-zA-Z0-9]+)\})");//匹配边声明
     regex r_comment("//.*$");//匹配注释
     int lineno = 1;
     while (!strm.eof()) {
